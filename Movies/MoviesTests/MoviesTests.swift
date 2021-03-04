@@ -3,7 +3,7 @@
 //  MoviesTests
 //
 //  Created by Robert Myers on 3/3/21.
-//  Copyright © 2021 KarSync LLC. All rights reserved.
+//  Copyright © 2021 Robby Myers. All rights reserved.
 //
 
 import XCTest
