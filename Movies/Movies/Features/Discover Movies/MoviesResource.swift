@@ -9,13 +9,9 @@
 import Foundation
 
 struct MoviesResource: APIResource {
+    typealias ModelType = MoviesWrapper
     var methodPath: String {
-        return "discover/movie"
+        return "/discover/movie"
     }
-    
-    var filter: String?
-    
-    typealias ModelType = Movie
-    
-    
+    var queryItems = [URLQueryItem(name: "sort_by", value: "popularity.desc")]
 }
