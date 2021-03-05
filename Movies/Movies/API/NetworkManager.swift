@@ -11,7 +11,7 @@ import Foundation
 class NetworkManager {
     func load<T>(resource: Resource<T>, withCompletion completion: @escaping (T?) -> Void) {
         let task = URLSession.shared.dataTask(with: resource.url) { [weak self] (data, _ , _) -> Void in
-            guard let data = data else {
+            guard data != nil else {
                 DispatchQueue.main.async { completion(nil) }
                 return
             }

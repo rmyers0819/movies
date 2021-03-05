@@ -18,7 +18,6 @@ struct ReviewsItemView: View {
                         .bold()
                     Text(author)
                 }
-                
             }
             review.content.map { content in
                 Text(content)

@@ -10,8 +10,8 @@ import SwiftUI
 
 struct MoviesView: View {
     
-    //@ObservedObject var model: MoviesViewModel
     @ObservedObject var dataController: DataController = DataController()
+
     var body: some View {
         NavigationView {
             List(dataController.movies) { movie in

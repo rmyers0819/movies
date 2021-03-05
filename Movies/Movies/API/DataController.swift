@@ -65,7 +65,6 @@ class DataController: ObservableObject {
             DispatchQueue.main.async {
                 self.movies = finalMovies
             }
-            
         }
     }
 }
