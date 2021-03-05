@@ -11,20 +11,26 @@ import SwiftUI
 struct MoviesView: View {
     
     @ObservedObject var dataController: DataController = DataController()
-
+    
     var body: some View {
         NavigationView {
-            List(dataController.movies) { movie in
-                
-                NavigationLink(destination: MovieItemDetailedView(movie: movie)) {
-                    MovieItemView(title: movie.title, overview: movie.tagLine ?? movie.overview, releaseDate: movie.releaseDate, audianceScore: movie.audianceScore, imageURL: movie.imageString)
+            if dataController.movies.isEmpty {
+                Text("No Movies to show")
+            }
+            else {
+                List(dataController.movies) { movie in
+                    
+                    NavigationLink(destination: MovieItemDetailedView(movie: movie)) {
+                        MovieItemView(title: movie.title, overview: movie.tagLine ?? movie.overview, releaseDate: movie.releaseDate, audianceScore: movie.audianceScore, imageURL: movie.imageString)
+                    }
                 }
+                .navigationBarTitle("Movies")
+                .navigationBarTitleDisplayMode(.large)
+                
             }
-            .navigationBarTitle("Movies")
-            .navigationBarTitleDisplayMode(.large)
-            .onAppear {
-                self.dataController.fetchData()
-            }
+        }
+        .onAppear {
+            self.dataController.fetchData()
         }
     }
 }

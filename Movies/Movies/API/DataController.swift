@@ -8,6 +8,7 @@
 
 import Foundation
 import SwiftUI
+import Network
 
 class DataController: ObservableObject {
     @Published var movies: [MovieViewModel] = []
@@ -19,6 +20,36 @@ class DataController: ObservableObject {
     static let userDefaultsKey = "savedMovieData"
     
     func fetchData() {
+        let monitor = NWPathMonitor()
+        monitor.pathUpdateHandler = { path in
+            if path.status == .satisfied {
+                self.getServerData()
+            }
+            else {
+                self.getPersistedData()
+            }
+            monitor.cancel()
+        }
+        monitor.start(queue: .global())
+    }
+    
+    func getPersistedData() {
+        // Check for saved data, then check to see if that data was created within the last 24 hours
+        let userDefaults = UserDefaults.standard
+        do {
+            let offLineMovieData = try userDefaults.getObject(forKey: DataController.userDefaultsKey, castTo: OfflineMovieData.self)
+            if let diff = Calendar.current.dateComponents([.hour], from: offLineMovieData.date, to: Date()).hour, diff < 24 {
+                DispatchQueue.main.async {
+                    self.movies = offLineMovieData.movies
+                }
+            }
+            
+        } catch {
+            print(error.localizedDescription)
+        }
+    }
+    
+    func getServerData() {
         moviesRequest = APIRequest(resource: MoviesResource())
         let dispatchGroup = DispatchGroup()
         var discoverMovies: [DiscoverMovie] = []
@@ -65,6 +96,22 @@ class DataController: ObservableObject {
             DispatchQueue.main.async {
                 self.movies = finalMovies
             }
+            self.saveMovieData(movies: finalMovies)
         }
     }
+    
+    func saveMovieData(movies: [MovieViewModel]) {
+        let offLineData = OfflineMovieData(movies: movies, date: Date())
+        let userDefaults = UserDefaults.standard
+        do {
+            try userDefaults.setObject(offLineData, forKey: DataController.userDefaultsKey)
+        } catch {
+            print(error.localizedDescription)
+        }
+    }
+}
+
+protocol ObjectSavable {
+    func setObject<Object>(_ object: Object, forKey: String) throws where Object: Encodable
+    func getObject<Object>(forKey: String, castTo type: Object.Type) throws -> Object where Object: Decodable
 }

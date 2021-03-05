@@ -9,7 +9,7 @@
 import Foundation
 
 // MARK: - WrappedReviews
-struct WrappedReviews: Codable {
+struct WrappedReviews: Decodable {
     let id, page: Int?
     let results: [Review]?
     let totalPages, totalResults: Int?

@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct MovieViewModel: Identifiable {
+struct MovieViewModel: Codable, Identifiable {
     var id: Int
     var title: String
     var imageString: String?
