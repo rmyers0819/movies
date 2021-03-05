@@ -9,7 +9,7 @@
 import Foundation
 
 struct TestData {
-    static var movies: [Movie] = {
+    static var movies: [DiscoverMovie] = {
         let url = Bundle.main.url(forResource: "Movies", withExtension: "json")!
         let data = try! Data(contentsOf: url)
         let wrapper = try! JSONDecoder().decode(MoviesWrapper.self, from: data)

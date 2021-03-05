@@ -10,13 +10,13 @@ import Foundation
 import SwiftUI
 
 class MoviesViewModel: ObservableObject {
-    @Published var movies: [Movie] = []
+    @Published var movies: [DiscoverMovie] = []
     @Published var page: Int = 1
     @Published var isLoading: Bool = false
     
     private var moviesRequest: APIRequest<MoviesResource>?
     
-    init(movies: [Movie] = []) {
+    init(movies: [DiscoverMovie] = []) {
         self.movies = movies
     }
     

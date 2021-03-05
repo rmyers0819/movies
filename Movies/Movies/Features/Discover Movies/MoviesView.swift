@@ -10,11 +10,12 @@ import SwiftUI
 
 struct MoviesView: View {
     
-    @ObservedObject var model: MoviesViewModel
-    
+    //@ObservedObject var model: MoviesViewModel
+    @ObservedObject var dataController: DataController = DataController()
     var body: some View {
         NavigationView {
-            List(model.movies) { movie in
+            List(dataController.movies) { movieData in
+                let movie = movieData.movie
                 NavigationLink(destination: MovieItemDetailedView(movie: movie)) {
                     MovieItemView(title: movie.title, overview: movie.overview, releaseDate: movie.releaseDate, audianceScore: String(movie.voteAverage), imageURL: movie.imageString)
                 }
@@ -22,14 +23,14 @@ struct MoviesView: View {
             .navigationBarTitle("Movies")
             .navigationBarTitleDisplayMode(.large)
             .onAppear {
-                self.model.fetchInitialData()
+                self.dataController.fetchData()
             }
         }
     }
 }
-
-struct MoviesView_Previews: PreviewProvider {
-    static var previews: some View {
-        MoviesView(model: MoviesViewModel(movies: TestData.movies))
-    }
-}
+//
+//struct MoviesView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        MoviesView(model: MoviesViewModel(movies: TestData.movies))
+//    }
+//}

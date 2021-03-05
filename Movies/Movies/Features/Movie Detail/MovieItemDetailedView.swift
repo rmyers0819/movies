@@ -9,14 +9,14 @@
 import SwiftUI
 
 struct MovieItemDetailedView: View {
-    var movie: Movie
+    var movie: DiscoverMovie
     
     @ObservedObject var model: MovieItemDetailedViewModel
     private var detailedMovie: DetailedMovie? {
         return model.detailedMovie
     }
     
-    init(movie: Movie) {
+    init(movie: DiscoverMovie) {
         self.movie = movie
         self.model = MovieItemDetailedViewModel(movieID: movie.id)
     }

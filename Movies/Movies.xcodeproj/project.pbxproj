@@ -29,7 +29,7 @@
 		D5D9CAAF25F0AB8A006F3F14 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D5D9CAAE25F0AB8A006F3F14 /* Preview Assets.xcassets */; };
 		D5D9CAB225F0AB8A006F3F14 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D5D9CAB025F0AB8A006F3F14 /* LaunchScreen.storyboard */; };
 		D5D9CABD25F0AB8A006F3F14 /* MoviesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5D9CABC25F0AB8A006F3F14 /* MoviesTests.swift */; };
-		D5D9CACB25F0AFC3006F3F14 /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5D9CACA25F0AFC3006F3F14 /* Movie.swift */; };
+		D5D9CACB25F0AFC3006F3F14 /* DiscoverMovie.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5D9CACA25F0AFC3006F3F14 /* DiscoverMovie.swift */; };
 		D5D9CACD25F0B167006F3F14 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5D9CACC25F0B167006F3F14 /* NetworkManager.swift */; };
 		D5D9CACF25F0B1C3006F3F14 /* APIResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5D9CACE25F0B1C3006F3F14 /* APIResource.swift */; };
 		D5D9CAD125F0B34D006F3F14 /* NetworkRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5D9CAD025F0B34D006F3F14 /* NetworkRequest.swift */; };
@@ -78,7 +78,7 @@
 		D5D9CAB825F0AB8A006F3F14 /* MoviesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MoviesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D5D9CABC25F0AB8A006F3F14 /* MoviesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesTests.swift; sourceTree = "<group>"; };
 		D5D9CABE25F0AB8A006F3F14 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		D5D9CACA25F0AFC3006F3F14 /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
+		D5D9CACA25F0AFC3006F3F14 /* DiscoverMovie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverMovie.swift; sourceTree = "<group>"; };
 		D5D9CACC25F0B167006F3F14 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		D5D9CACE25F0B1C3006F3F14 /* APIResource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIResource.swift; sourceTree = "<group>"; };
 		D5D9CAD025F0B34D006F3F14 /* NetworkRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRequest.swift; sourceTree = "<group>"; };
@@ -133,7 +133,6 @@
 			children = (
 				D584CDA025F0F06800EEB124 /* MovieItemDetailedView.swift */,
 				D584CDA225F0F3E300EEB124 /* MovieItemDetailedViewModel.swift */,
-				D584CDA425F0F76C00EEB124 /* DetailedMovie.swift */,
 				D584CDA625F0F8E300EEB124 /* DetailedMovieResource.swift */,
 			);
 			path = "Movie Detail";
@@ -216,7 +215,9 @@
 		D5D9CAC925F0AF4D006F3F14 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				D5D9CACA25F0AFC3006F3F14 /* DiscoverMovie.swift */,
 				D52A14AF25F2A0A200F9DFA1 /* MovieData.swift */,
+				D584CDA425F0F76C00EEB124 /* DetailedMovie.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -245,7 +246,6 @@
 				D5D9CAE325F0C79D006F3F14 /* MovieItemView.swift */,
 				D5D9CAD925F0BEEC006F3F14 /* MoviesViewModel.swift */,
 				D5D9CAD525F0B727006F3F14 /* MoviesResource.swift */,
-				D5D9CACA25F0AFC3006F3F14 /* Movie.swift */,
 			);
 			path = "Discover Movies";
 			sourceTree = "<group>";
@@ -385,7 +385,7 @@
 				D584CDA125F0F06800EEB124 /* MovieItemDetailedView.swift in Sources */,
 				D5D9CACD25F0B167006F3F14 /* NetworkManager.swift in Sources */,
 				D5D9CAD625F0B727006F3F14 /* MoviesResource.swift in Sources */,
-				D5D9CACB25F0AFC3006F3F14 /* Movie.swift in Sources */,
+				D5D9CACB25F0AFC3006F3F14 /* DiscoverMovie.swift in Sources */,
 				D584CDA525F0F76C00EEB124 /* DetailedMovie.swift in Sources */,
 				D52A148E25F1BDA000F9DFA1 /* Review.swift in Sources */,
 				D5D9CACF25F0B1C3006F3F14 /* APIResource.swift in Sources */,

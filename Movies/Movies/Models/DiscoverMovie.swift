@@ -8,21 +8,21 @@
 
 import Foundation
 
-struct Movie: Decodable, Identifiable {
-    let adult: Bool
-    let backdropPath: String
-    let genreIDS: [Int]
+struct DiscoverMovie: Decodable, Identifiable {
+    let adult: Bool?
+    let backdropPath: String?
+    let genreIDS: [Int]?
     let id: Int
-    let originalLanguage: String
-    let originalTitle: String
-    let overview: String
-    let popularity: Double
+    let originalLanguage: String?
+    let originalTitle: String?
+    let overview: String?
+    let popularity: Double?
     let posterPath: String?
-    let releaseDate: String
-    let title: String
-    let video: Bool
-    let voteAverage: Double
-    let voteCount: Int
+    let releaseDate: String?
+    let title: String?
+    let video: Bool?
+    let voteAverage: Double?
+    let voteCount: Int?
     
     var imageString: String? {
         guard let posterPath = posterPath else { return nil }
@@ -47,7 +47,7 @@ struct Movie: Decodable, Identifiable {
 
 struct MoviesWrapper: Decodable {
     let page: Int
-    let movies: [Movie]
+    let movies: [DiscoverMovie]
     let totalPages, totalResults: Int
     
     enum CodingKeys: String, CodingKey {

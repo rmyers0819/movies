@@ -27,6 +27,8 @@ struct DetailedMovie: Decodable {
     let runtime: Int?
 //    let status, tagline: String?
     let title: String?
+    let tagline: String?
+
 //    let video: Bool
 //    let voteAverage, voteCount: Int
 
@@ -46,6 +48,7 @@ struct DetailedMovie: Decodable {
         case releaseDate = "release_date"
         case revenue, runtime
         case title
+        case tagline
 //        case status, tagline, title, video
 //        case voteAverage = "vote_average"
 //        case voteCount = "vote_count"
