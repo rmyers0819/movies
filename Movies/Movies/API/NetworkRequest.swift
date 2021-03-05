@@ -16,7 +16,11 @@ protocol NetworkRequest: AnyObject {
 
 extension NetworkRequest {
      func load(_ url: URL, withCompletion completion: @escaping (ModelType?) -> Void) {
-        let task = URLSession.shared.dataTask(with: url) { [weak self] (data, _ , _) -> Void in
+        let task = URLSession.shared.dataTask(with: url) { [weak self] (data, urlResponse , error) -> Void in
+            if let data = data {
+                print("data is: \(String(decoding: data, as: UTF8.self))")
+            }
+            
             guard let data = data, let value = self?.decode(data) else {
                 DispatchQueue.main.async { completion(nil) }
                 return

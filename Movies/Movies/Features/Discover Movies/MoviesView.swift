@@ -20,6 +20,7 @@ struct MoviesView: View {
                 }
             }
             .navigationBarTitle("Movies")
+            .navigationBarTitleDisplayMode(.large)
             .onAppear {
                 self.model.fetchInitialData()
             }
