@@ -15,15 +15,19 @@ class DataController: ObservableObject {
     private var moviesRequest: APIRequest<MoviesResource>?
     private var reviewRequests: [APIRequest<ReviewsResource>] = []
     private var detailsRequests: [APIRequest<DetailedMovieResource>] = []
-     
+    
+    static let userDefaultsKey = "savedMovieData"
+    
     func fetchData() {
         moviesRequest = APIRequest(resource: MoviesResource())
         let dispatchGroup = DispatchGroup()
-        var movieData: [MovieViewModel] = []
+        var discoverMovies: [DiscoverMovie] = []
+        var detailedMovies: [DetailedMovie] = []
         var reviewsDict = [Int:[Review]]()
         dispatchGroup.enter()
         moviesRequest?.execute { [weak self] moviesWrapper in
-            moviesWrapper?.movies.forEach({ [weak self] movie in
+            discoverMovies = moviesWrapper?.movies ?? []
+            discoverMovies.forEach({ [weak self] movie in
                 // Get Movie Details for each movie on it's own thread.
                 dispatchGroup.enter()
                 let request = APIRequest(resource: DetailedMovieResource(movieID: movie.id))
@@ -31,7 +35,7 @@ class DataController: ObservableObject {
                 request.execute { movieDetails in
                     dispatchGroup.leave()
                     guard let movieDetails = movieDetails else { return }
-                    movieData.append(MovieViewModel(movie: movie, movieDetails: movieDetails, reviews: []))
+                    detailedMovies.append(movieDetails)
                 }
                 // Get Movie Reviews for each movie on it's own thread.
                 dispatchGroup.enter()
@@ -49,8 +53,14 @@ class DataController: ObservableObject {
         // Perform final logic after all responses have returned or timed out
         dispatchGroup.notify(queue: DispatchQueue.global()) {
             var finalMovies: [MovieViewModel] = []
-            movieData.forEach { movieData in
-                finalMovies.append(MovieViewModel(movie: movieData.movie, movieDetails: movieData.movieDetails, reviews: reviewsDict[movieData.movie.id] ?? []))
+            discoverMovies.forEach { movie in
+                guard let title = movie.title, let overView = movie.overview else { return }
+                var audianceScore: String? = nil
+                if let score = movie.voteAverage {
+                    audianceScore = String(score)
+                }
+                let movieDetails = detailedMovies.first(where: { $0.id == movie.id })
+                finalMovies.append(MovieViewModel(id: movie.id, title: title, imageString: movie.imageString, tagLine: movieDetails?.tagline, overview: overView, releaseDate: movie.releaseDate, audianceScore: audianceScore, isAdultFilm: movie.adult ?? false, homePage: movieDetails?.homepage, reviews: reviewsDict[movie.id] ?? []))
             }
             DispatchQueue.main.async {
                 self.movies = finalMovies

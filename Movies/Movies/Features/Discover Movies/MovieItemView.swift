@@ -11,34 +11,37 @@ import SwiftUI
 struct MovieItemView: View {
     let title: String
     let overview: String
-    let releaseDate: String
-    let audianceScore: String
+    let releaseDate: String?
+    let audianceScore: String?
     let imageURL: String?
     
     var body: some View {
         VStack(alignment: .leading) {
-            Text(title)
-                .font(.headline)
-            Spacer(minLength: 10)
             HStack(alignment: .center) {
                 imageURL.map { imageURL in
                     ImageWithURL(imageURL)
                         .frame(width: 100, height: 150, alignment: .center)
                 }
                 VStack(alignment: .leading) {
+                    Text(title)
+                        .font(.headline)
                     Text(overview)
                         .font(.footnote)
                         .padding(.bottom, 10)
                     VStack(alignment: .leading) {
-                        HStack {
-                            Text("Release Date:")
-                                .bold()
-                            Text(releaseDate)
+                        releaseDate.map { date in
+                            HStack {
+                                Text("Release Date:")
+                                    .bold()
+                                Text(date)
+                            }
                         }
-                        HStack {
-                            Text("Audiance Rating:")
-                                .bold()
-                            Text(audianceScore)
+                        audianceScore.map { score in
+                            HStack {
+                                Text("Audiance Rating:")
+                                    .bold()
+                                Text(score)
+                            }
                         }
                     }
                     .font(.subheadline)

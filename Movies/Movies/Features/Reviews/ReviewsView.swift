@@ -9,21 +9,14 @@
 import SwiftUI
 
 struct ReviewsView: View {
-    @ObservedObject var model: ReviewsViewModel
-    private var reviews: [Review] {
-        return model.reviews ?? []
-    }
-    init(movieID: Int) {
-        self.model = ReviewsViewModel(movieID: movieID)
-    }
-    
+    var reviews: [Review]
     var body: some View {
+        
         List(reviews) { review in
             ReviewsItemView(review: review)
         }
-        .onAppear() {
-            model.fetchReviews()
-        }
+        .navigationBarTitle(reviews.count == 1 ? "1 Review" : "\(reviews.count) Reviews")
+        .navigationBarTitleDisplayMode(.large)
     }
 }
 
